@@ -1,23 +1,39 @@
 # Written by Mayra Vazquez-Sanchez
 
+
 def readFile():
+    '''Reads file and returns its contents'''
     words = open("Words.txt", "r")
     contents = words.readlines()
     print(contents)
     return contents
 
 def getFrequencies(contents):
+    '''Calculates frequencies of letter & sums all frequencies'''
     letters = dict()
     letter_count = 0
     sum_of_freq_letters = 0
     for line in contents:
         for letter in line:
             letters[letter] = letters.get(letter, 0) + 1
-            letter_count++ 
+            letter_count += 1
         sum_of_freq_letters += letter_count
+    print(letters)
+    print(sum_of_freq_letters)
     return letters, sum_of_freq_letters
 
-def getprobabilty(letters, sum_of_freq_letters):
-    probabilities_letters = []
-    probability_letter = 
+def getProbability(letters, sum_of_freq_letters):
+    '''Calculates probability of letter & sums all probabilities'''
+    sum_probabilities = 0
+    for letter, letter_count in letters.items():
+        prob_of_letter = letter_count / sum_of_freq_letters
+        print(letter)
+        print(prob_of_letter)
+        sum_probabilities += prob_of_letter
+    return sum_probabilities
+
+
+contents = readFile()
+letters, sum_of_freq_letters = getFrequencies(contents)
+getProbability(letters, sum_of_freq_letters)
 
