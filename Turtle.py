@@ -9,19 +9,19 @@ def origin(vertex):
     turtle.pendown()
 
 def piesections(segment):
-    area = (2*math.pi)*segment
+    area = (2*math.pi)*segment #central angle
     return area
 
-#getting values from file idk how to call the values
+
 #Name_of_segment = the letters in the file
 #segment = prob_of_letter (has to calculate the remaining letters not called)
-COLORS = cycle(['yellow', 'green', 'red', 'cyan', 'white', 'blue', 'mediumpurple'])
-Name_of_segment = ["h","e","l","l","o"," ","g","u","y","s","All other letters"]
+Rainbow = cycle(['red','orange', 'yellow', 'green', 'blue', 'purple', 'pink'])
+All_others = ['gray']
+Name_of_segment = ["h","e","l","l","o"," ","b","o","y","All other letters"]
 segment = {
-	"a": 0.50,
-	"b": 0.10,
-	"c": 0.20,
-	"d": 0.60
+	"l": 0.20,
+	"e": 0.20,
+	"All Other Letters": 0.60
 }
 #window=w
 w = turtle.Screen()
@@ -32,20 +32,20 @@ w.title ("Pie Chart")
 r=150
 vertex=(-0,0)
 origin(vertex)
-turtle.dot (7,"black") #idkkk
+turtle.dot (7,"black")
 turtle.penup()
 turtle.sety(-r)
 turtle.pendown()
 
 #segment has a different color, legend showing the letter and its probability
-#in this function i have to call for back at origin
 #area of segment = central angle of section/2pi
 #central angle of section = segment, which is the prob_of_letter out of 100
 #need a loop to create all the inputed segments 
 angle_sum=0
+
 for n in segment:
     angle=piesections(segment[n])
-    turtle.fillcolor(next(COLORS))
+    turtle.fillcolor(next(Rainbow))
     turtle.begin_fill()
     turtle.circle(r,angle)
     position = turtle.position()
@@ -53,8 +53,14 @@ for n in segment:
     turtle.end_fill()
     turtle.setpos(position)
     angle_sum += angle
+rest=360-angle_sum
+turtle.color(next(Rainbow))
+turtle.begin_fill()
+turtle.circle(r, rest)
+position = turtle.position()
+origin(vertex)
+turtle.end_fill()
 
-turtle.circle(r, 360-angle_sum)
 
 
 
