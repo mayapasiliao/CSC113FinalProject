@@ -1,18 +1,34 @@
 import turtle
 import math
 
-#window=w
-w = turtle.Screen()
-w.setup(450,650,0,0) #width,height
-w.title ("Pie Chart")
+
+#takes you to origin of the circle after each section
+def origin(vertex):
+    turtle.penup()
+    turtle.setpos(vertex)
+    turtle.pendown()
+
+def piesections(segment):
+    area = (2*math.pi)*segment
+    return area
+
 
 #getting values from file idk how to call the values
 #Name_of_segment = the letters in the file
 #segment = prob_of_letter (has to calculate the remaining letters not called)
 #example hello guys = 10 is in file
 Name_of_segment = ["h","e","l","l","o"," ","g","u","y","s","All other letters"]
-segment = [0.10,0.10,0.20,0.60]
-
+segment = {
+	"a": 0.10,
+	"b": 0.10,
+	"c": 0.20,
+	"d": 0.60
+}
+    
+#window=w
+w = turtle.Screen()
+w.setup(450,650,0,0) #width,height
+w.title ("Pie Chart")
 
 #Creating circle
 r=150
@@ -24,23 +40,23 @@ turtle.penup()
 turtle.setpos(vertex)
 turtle.dot (10,"black")
 
-
-#takes you to origin of the circle after each section
-def origin(vertex):
-    turtle.penup()
-    turtle.setpos(vertex)
-    
-
 #segment has a different color, legend showing the letter and its probability
 #in this function i have to call for back at origin
 #area of segment = central angle of section/2pi
-#central angle of section = segment, which is the prob_of_letter
+#central angle of section = segment, which is the prob_of_letter out of 100
+#need a loop to create all the inputed segments 
 
-def piesections(segment):
-    area=segment/(2*math.pi)
-    
+for n in segment:
+    angle=piesections(segment["a"])
+    origin(vertex)
+    turtle.right(angle)
+    turtle.forward (150)
+    origin(vertex)
 
 
 
-#calling for function
-piesections(segment)
+
+
+
+
+
