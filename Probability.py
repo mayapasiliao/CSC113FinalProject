@@ -32,8 +32,11 @@ def getProbability(letters, sum_of_freq_letters):
         sum_probabilities += prob_of_letter
     return sum_probabilities
 
+def probability():
+    '''Calls all functions collectively'''
+    contents = readFile()
+    letters, sum_of_freq_letters = getFrequencies(contents)
+    sum_probabilities = getProbability(letters, sum_of_freq_letters)
+    return sum_probabilities
 
-contents = readFile()
-letters, sum_of_freq_letters = getFrequencies(contents)
-getProbability(letters, sum_of_freq_letters)
-
+probability()
