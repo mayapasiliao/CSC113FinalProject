@@ -37,6 +37,6 @@ def probability():
     contents = readFile()
     letters, sum_of_freq_letters = getFrequencies(contents)
     sum_probabilities = getProbability(letters, sum_of_freq_letters)
-    return sum_probabilities
+    return sum_probabilities, letters
 
 probability()
