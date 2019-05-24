@@ -17,7 +17,9 @@ def piesections(segment):
 def draw_pie_chart(n):
     #Name_of_segment = the letters in the file
     #segment = prob_of_letter (has to calculate the remaining letters not called)
-    Rainbow = cycle(['red','orange', 'yellow', 'light green', 'blue', 'purple', 'pink','gray','brown'])
+    Rainbow = cycle(['red','orange', 'yellow', 'light green', 'blue', 'purple', 'violet','gray','brown','beige'])
+    Rainbow_letters = cycle(['red','orange', 'yellow', 'light green', 'blue', 'purple', 'violet','gray','brown','beige'])
+
     # Name_of_segment = ["h","e","l","l","o"," ","b","o","y","All other letters"]
     # segment = {
     # 	"l": 0.20,
@@ -49,6 +51,7 @@ def draw_pie_chart(n):
     turtle.dot (7,"black")
     turtle.penup()
     turtle.sety(-r)
+    turtle.pencolor("white")
     turtle.pendown()
 
     angle_sum=0
@@ -64,6 +67,7 @@ def draw_pie_chart(n):
         angle_sum += angle
 
     rest=360-angle_sum
+    
     turtle.color(next(Rainbow))
     turtle.begin_fill()
     turtle.circle(r, rest)
@@ -76,21 +80,25 @@ def draw_pie_chart(n):
     turtle.forward(r*1.33)
     turtle.left(90)
 
+    AOL=0
     for (x,i) in zip(sorted_segment, range(0,n)):
         turtle.pencolor('black')
         angle=piesections(segment[x]/sum_probabilities)
         turtle.circle(r*1.33,angle/2)
-        turtle.write("%s, %f" % (x, segment[x]/sum_probabilities), align = "center",font=('Arial',9,"bold"))
+        turtle.write("%s, %f" % (x, segment[x]/sum_probabilities)  , align = "center",font=('Arial',9,"bold"))
         turtle.circle(r*1.33,angle/2)
+        AOL+=(segment[x]/sum_probabilities)
+
         
-    if rest>0 in zip(sorted_segment, range(0,n)):
-        turtle.pencolor('white')
-        turtle.circle(r*1.33,rest/2)
-        turtle.write('All other letters,', align = "left",font=('Arial',9,"bold"))
-        turtle.forward(37)
-     #   turtle.circle(r*1.33,rest/2)
-        turtle.write((rest/sum_probabilities), align = "left",font=('Arial',9,"bold"))
-        turtle.circle(r*1.33,angle/2)
+    turtle.pencolor('white')
+    turtle.circle(r*1.33,rest/2)
+
+
+    if AOL !=1:
+          turtle.write('All other letters,', align = "left",font=('Arial',8,"bold"))
+          turtle.forward(37)
+          turtle.write((1-AOL), align = "left",font=('Arial',9,"bold"))
+          turtle.circle(r*1.33,angle/2)
     
 
   
