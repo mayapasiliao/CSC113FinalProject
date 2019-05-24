@@ -28,7 +28,7 @@ def draw_pie_chart(n):
     turtle.dot(7, "black")
     turtle.penup()
     turtle.sety(-r)
-    turtle.pencolor("white")
+    turtle.pencolor("black")
     turtle.pendown()
     
     angle_sum = 0
@@ -63,7 +63,9 @@ def draw_pie_chart(n):
         turtle.pencolor('black')
         c_angle = pie_sec(probabilities[letter])
         turtle.circle(r*1.25,c_angle/2)
-        turtle.write("%s, %f" % (letter, probabilities[letter]), align = "center",font=('Arial',9,"bold"))
+    #   turtle.write("%s, \n %f" % (letter, probabilities[letter]), align = "center",font=('Arial',8,"bold"))
+        turtle.write("%s\n" % (letter), align = "center",font=('Arial',9,"bold"))
+        turtle.write(" \n%f" % ( probabilities[letter]), align = "center",font=('Arial',7,"bold"))
         turtle.circle(r*1.25,c_angle/2)
         sum_of_prob_others += probabilities[letter]
         
