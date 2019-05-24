@@ -52,7 +52,6 @@ def draw_pie_chart(n):
     turtle.sety(-r)
     turtle.pendown()
 
-
     angle_sum=0
     for (x,i) in zip(sorted_segment, range(0,n)):
         angle=piesections(segment[x]/sum_probabilities)
@@ -82,5 +81,10 @@ def draw_pie_chart(n):
         turtle.pencolor('black')
         angle=piesections(segment[x]/sum_probabilities)
         turtle.circle(r*1.33,angle/2)
-        turtle.write("%s, %f" % (x, segment[x]), align = "center",font=('Arial',9,"bold"))
+        turtle.write("%s, %f" % (x, segment[x]/sum_probabilities), align = "center",font=('Arial',9,"bold"))
         turtle.circle(r*1.33,angle/2)
+
+  
+
+  
+        
