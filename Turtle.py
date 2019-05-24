@@ -7,9 +7,9 @@ def origin(vertex):
     turtle.penup()
     turtle.setpos(vertex)
     turtle.pendown()
-
+#we need to divde this by the total
 def piesections(segment):
-    area = (2*math.pi)*segment #central angle
+    area = (360)*segment #central angle
     return area
 
 
@@ -38,7 +38,6 @@ turtle.sety(-r)
 turtle.pendown()
 
 #segment has a different color, legend showing the letter and its probability
-#area of segment = central angle of section/2pi
 #central angle of section = segment, which is the prob_of_letter out of 100
 #need a loop to create all the inputed segments 
 angle_sum=0
@@ -60,6 +59,11 @@ turtle.circle(r, rest)
 position = turtle.position()
 origin(vertex)
 turtle.end_fill()
+
+for letters,n in segment:
+    turtle.circle(r,angle)
+    turtle.write((letters,n),align= 'center', font=('Arial',8,'Normal'))
+    turtle.circle(r,angle)
 
 
 
