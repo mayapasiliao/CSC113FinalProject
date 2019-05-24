@@ -1,99 +1,76 @@
 import turtle
-import operator
-import collections
+from collections import OrderedDict
 from itertools import cycle
 from Probability import probability
 
-#takes you to origin of the circle after each section
-def origin(vertex):
+def origin():
     turtle.penup()
-    turtle.setpos(vertex)
+    turtle.setpos(0,0)
     turtle.pendown()
-#we need to divde this by the total
-def piesections(segment):
-    area = (360)*segment #central angle
-    return area
+
+def pie_sec(prob_letter):
+    return 360 * prob_letter
 
 def draw_pie_chart(n):
-    #Name_of_segment = the letters in the file
-    #segment = prob_of_letter (has to calculate the remaining letters not called)
-    Rainbow = cycle(['red','orange', 'yellow', 'light green', 'blue', 'purple', 'pink','gray','brown'])
-    # Name_of_segment = ["h","e","l","l","o"," ","b","o","y","All other letters"]
-    # segment = {
-    # 	"l": 0.20,
-    # 	"e": 0.20,
-    #         " ": 0.10,
-    # 	"All Other Letters": 0.50
-    # }
-    sum_probabilities, segment = probability()
-    sum_probabilities = 0
-    for x in segment:
-        sum_probabilities += segment[x]
+    rainbow = cycle(['tomato', 'orange', 'light blue', 'light gray', 'rosybrown', 'light pink','navy'])
 
-    sorted_segment_tuples = sorted(segment.items(), key=lambda element: element[1])
-    sorted_segment_tuples.reverse()
-    sorted_segment = collections.OrderedDict(sorted_segment_tuples)
-    for x in sorted_segment:
-        print("%s, %f" % (x, sorted_segment[x]))
+    letters, probabilities = probability()
+    letters_desc = OrderedDict(sorted(letters.items(), key=lambda \
+                                      element: element[1], reverse=True))
 
-    #window=w
-    w = turtle.Screen()
-    w.setup(450,650) #width,height
-    w.bgcolor("light blue")
-    w.title ("Probability of Letter Pie Chart")
+    window = turtle.Screen()
+    window.setup(700, 600)
+    window.bgcolor("white")
+    window.title("Probability of Most Frequent Letters")
 
-    #Creating circle with vertex
-    r=150
-    vertex=(-0,0)
-    origin(vertex)
-    turtle.dot (7,"black")
+    r = 150
+    origin()
+    turtle.dot(7, "black")
     turtle.penup()
     turtle.sety(-r)
+    turtle.pencolor("white")
     turtle.pendown()
+    
+    angle_sum = 0
 
-    angle_sum=0
-    for (x,i) in zip(sorted_segment, range(0,n)):
-        angle=piesections(segment[x]/sum_probabilities)
-        turtle.fillcolor(next(Rainbow))
+    for letter, letter_freq in zip(letters_desc, range(0,n)):
+        c_angle = pie_sec(probabilities[letter])
+        turtle.fillcolor(next(rainbow))
         turtle.begin_fill()
-        turtle.circle(r,angle)
-        position = turtle.position()
-        origin(vertex)
+        turtle.circle(r,c_angle)
+        pos = turtle.position()
+        origin()
         turtle.end_fill()
-        turtle.setpos(position)
-        angle_sum += angle
+        turtle.setpos(pos)
+        angle_sum += c_angle
 
-    rest=360-angle_sum
-    turtle.color(next(Rainbow))
+    rest = 360 - angle_sum
+    turtle.color('lightsteelblue')
     turtle.begin_fill()
     turtle.circle(r, rest)
-    position = turtle.position()
-    origin(vertex)
+    pos = turtle.position()
+    origin()
     turtle.end_fill()
 
     turtle.penup()
     turtle.right(90)
-    turtle.forward(r*1.33)
+    turtle.forward(r*1.25)
     turtle.left(90)
 
-    for (x,i) in zip(sorted_segment, range(0,n)):
-        turtle.pencolor('black')
-        angle=piesections(segment[x]/sum_probabilities)
-        turtle.circle(r*1.33,angle/2)
-        turtle.write("%s, %f" % (x, segment[x]/sum_probabilities), align = "center",font=('Arial',9,"bold"))
-        turtle.circle(r*1.33,angle/2)
-        
-    if rest>0 in zip(sorted_segment, range(0,n)):
-        turtle.pencolor('white')
-        turtle.circle(r*1.33,rest/2)
-        turtle.write('All other letters,', align = "left",font=('Arial',9,"bold"))
-        turtle.forward(37)
-     #   turtle.circle(r*1.33,rest/2)
-        turtle.write((rest/sum_probabilities), align = "left",font=('Arial',9,"bold"))
-        turtle.circle(r*1.33,angle/2)
+    sum_of_prob_others = 0
     
-
-  
-
-  
+    for letter, freq_letter in zip(letters_desc, range(0,n)):
+        turtle.pencolor('black')
+        c_angle = pie_sec(probabilities[letter])
+        turtle.circle(r*1.25,c_angle/2)
+        turtle.write("%s, %f" % (letter, probabilities[letter]), align = "center",font=('Arial',9,"bold"))
+        turtle.circle(r*1.25,c_angle/2)
+        sum_of_prob_others += probabilities[letter]
         
+    turtle.circle(r*1.3,rest/2)
+
+    if  sum_of_prob_others != 1:
+          turtle.write("All other letters,\n%f" % (1-sum_of_prob_others), align = "center",font=('Arial',9,"bold"))
+          turtle.circle(r*1.3,c_angle/2)
+
+
