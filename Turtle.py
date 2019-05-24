@@ -17,8 +17,7 @@ def piesections(segment):
 def draw_pie_chart(n):
     #Name_of_segment = the letters in the file
     #segment = prob_of_letter (has to calculate the remaining letters not called)
-    Rainbow = cycle(['red','orange', 'yellow', 'light green', 'blue', 'purple', 'pink'])
-    All_others = ['gray']
+    Rainbow = cycle(['red','orange', 'yellow', 'light green', 'blue', 'purple', 'pink','gray','brown'])
     # Name_of_segment = ["h","e","l","l","o"," ","b","o","y","All other letters"]
     # segment = {
     # 	"l": 0.20,
@@ -83,6 +82,16 @@ def draw_pie_chart(n):
         turtle.circle(r*1.33,angle/2)
         turtle.write("%s, %f" % (x, segment[x]/sum_probabilities), align = "center",font=('Arial',9,"bold"))
         turtle.circle(r*1.33,angle/2)
+        
+    if rest>0 in zip(sorted_segment, range(0,n)):
+        turtle.pencolor('white')
+        turtle.circle(r*1.33,rest/2)
+        turtle.write('All other letters,', align = "left",font=('Arial',9,"bold"))
+        turtle.forward(37)
+     #   turtle.circle(r*1.33,rest/2)
+        turtle.write((rest/sum_probabilities), align = "left",font=('Arial',9,"bold"))
+        turtle.circle(r*1.33,angle/2)
+    
 
   
 
