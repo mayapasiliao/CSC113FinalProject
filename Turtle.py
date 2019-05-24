@@ -15,18 +15,20 @@ def piesections(segment):
 
 #Name_of_segment = the letters in the file
 #segment = prob_of_letter (has to calculate the remaining letters not called)
-Rainbow = cycle(['red','orange', 'yellow', 'green', 'blue', 'purple', 'pink'])
+Rainbow = cycle(['red','orange', 'yellow', 'light green', 'blue', 'purple', 'pink'])
 All_others = ['gray']
 Name_of_segment = ["h","e","l","l","o"," ","b","o","y","All other letters"]
 segment = {
 	"l": 0.20,
 	"e": 0.20,
-	"All Other Letters": 0.60
+        " ": 0.10,
+	"All Other Letters": 0.50
 }
 #window=w
 w = turtle.Screen()
 w.setup(450,650) #width,height
-w.title ("Pie Chart")
+w.bgcolor("light blue")
+w.title ("Probability of Letter Pie Chart")
 
 #Creating circle with vertex
 r=150
@@ -37,9 +39,7 @@ turtle.penup()
 turtle.sety(-r)
 turtle.pendown()
 
-#segment has a different color, legend showing the letter and its probability
-#central angle of section = segment, which is the prob_of_letter out of 100
-#need a loop to create all the inputed segments 
+
 angle_sum=0
 
 for n in segment:
@@ -60,10 +60,18 @@ position = turtle.position()
 origin(vertex)
 turtle.end_fill()
 
-for letters,n in segment:
-    turtle.circle(r,angle)
-    turtle.write((letters,n),align= 'center', font=('Arial',8,'Normal'))
-    turtle.circle(r,angle)
+turtle.penup()
+turtle.right(90)
+turtle.forward(r*1.33)
+turtle.left(90)
+
+for n in segment:
+    turtle.pencolor('black')
+    angle=piesections(segment[n])
+    turtle.circle(r*1.33,angle/2)
+    turtle.write("%s, %f" % (n, segment[n]), align = "center",font=('Arial',9,"bold"))
+    turtle.circle(r*1.33,angle/2)
+
 
 
 
