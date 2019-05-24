@@ -1,4 +1,6 @@
 import turtle
+import operator
+import collections
 from itertools import cycle
 from Probability import probability
 
@@ -27,8 +29,13 @@ def draw_pie_chart(n):
     sum_probabilities, segment = probability()
     sum_probabilities = 0
     for x in segment:
-        print("%s, %f" % (x, segment[x]))
         sum_probabilities += segment[x]
+
+    sorted_segment_tuples = sorted(segment.items(), key=lambda element: element[1])
+    sorted_segment_tuples.reverse()
+    sorted_segment = collections.OrderedDict(sorted_segment_tuples)
+    for x in sorted_segment:
+        print("%s, %f" % (x, sorted_segment[x]))
 
     #window=w
     w = turtle.Screen()
@@ -47,8 +54,7 @@ def draw_pie_chart(n):
 
 
     angle_sum=0
-    counter = 0
-    for x in segment:
+    for (x,i) in zip(sorted_segment, range(0,n)):
         angle=piesections(segment[x]/sum_probabilities)
         turtle.fillcolor(next(Rainbow))
         turtle.begin_fill()
@@ -58,9 +64,6 @@ def draw_pie_chart(n):
         turtle.end_fill()
         turtle.setpos(position)
         angle_sum += angle
-        counter += 1
-        if counter == n:
-            break
 
     rest=360-angle_sum
     turtle.color(next(Rainbow))
@@ -75,7 +78,7 @@ def draw_pie_chart(n):
     turtle.forward(r*1.33)
     turtle.left(90)
 
-    for x in segment:
+    for (x,i) in zip(sorted_segment, range(0,n)):
         turtle.pencolor('black')
         angle=piesections(segment[x]/sum_probabilities)
         turtle.circle(r*1.33,angle/2)
