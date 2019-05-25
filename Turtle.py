@@ -69,6 +69,7 @@ def draw_pie_chart(n):
         if letters[letter]>1:
             turtle.write("%f" % ( probabilities[letter]), align = "center",font=('Arial',9,"bold"))
         else:
+            turtle.forward(5)
             turtle.write("%f" % ( probabilities[letter]), align = "center",font=('Arial',6,"bold"))
         turtle.circle(r*1.25,c_angle/2)
         sum_of_prob_others += probabilities[letter]
