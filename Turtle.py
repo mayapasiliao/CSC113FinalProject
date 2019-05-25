@@ -63,9 +63,16 @@ def draw_pie_chart(n):
         turtle.pencolor('black')
         c_angle = pie_sec(probabilities[letter])
         turtle.circle(r*1.25,c_angle/2)
+        print(letters[letter])
+        
     #   turtle.write("%s, \n %f" % (letter, probabilities[letter]), align = "center",font=('Arial',8,"bold"))
-        turtle.write("%s\n" % (letter), align = "center",font=('Arial',9,"bold"))
-        turtle.write(" \n%f" % ( probabilities[letter]), align = "center",font=('Arial',7,"bold"))
+        if letters[letter]>1:
+            turtle.write("%s\n" % (letter), align = "center",font=('Arial',9,"bold"))
+            turtle.write("%f" % ( probabilities[letter]), align = "center",font=('Arial',9,"bold"))
+        else:
+            
+            turtle.write("%s\n \t" % (letter), align = "center",font=('Arial',9,"bold"))
+            turtle.write("%f" % ( probabilities[letter]), align = "center",font=('Arial',6,"bold"))
         turtle.circle(r*1.25,c_angle/2)
         sum_of_prob_others += probabilities[letter]
         
@@ -75,5 +82,5 @@ def draw_pie_chart(n):
           turtle.write("All other letters,\n%f" % (1-sum_of_prob_others), align = "center",font=('Arial',9,"bold"))
           turtle.circle(r*1.3,c_angle/2)
 
-
+    turtle.ht()
 
